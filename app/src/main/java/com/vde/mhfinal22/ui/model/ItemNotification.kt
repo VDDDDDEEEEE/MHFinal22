@@ -65,3 +65,11 @@ fun createDayOfWeekList(): ArrayList<RepeatInfo> {
     }
     return list
 }
+
+fun createRegularAlarmDayOfWeekList(): ArrayList<RepeatInfo> {
+    val list = ArrayList<RepeatInfo>()
+    for (i in 1 until 8) {
+        list.add(RepeatInfo(true, DayOfWeek.of(i)))
+    }
+    return list
+}
