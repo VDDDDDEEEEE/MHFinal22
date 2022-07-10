@@ -10,6 +10,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.speech.tts.TextToSpeech
+import android.widget.ProgressBar
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
@@ -136,29 +137,42 @@ class MainActivity : ComponentActivity(), MainInterface {
                     color = Yellow
                 ) {
                     Box() {
-                        /*if(viewModel.pokeLoading.value){
-
-                        }else{
-
-                        }*/
-                        Column(
-                            Modifier.fillMaxSize(),
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            //verticalArrangement = Arrangement.Center
-                        ) {
-                            Title()
-                            Pickachu(viewModel)
-                            SetItemList(viewModel)
+                        if (viewModel.pokeLoading.value) {
+                            Box(
+                                modifier = Modifier.fillMaxSize(),
+                                contentAlignment = Alignment.Center,
+                            ) {
+                                CircularProgressIndicator(
+                                    color = RED
+                                )
+                            }
+                        } else {
 
 
-                        }
-                        FloatBtn(this@MainActivity, viewModel)
-                        FloatingVoiceBtn(this@MainActivity, viewModel)
-                        if (viewModel.showDialog.value) {
-                            BottomDialog(sheetstate, scaffoldState, scope, viewModel)
-                        }
-                        if (viewModel.openAlertDialog.value) {
-                            DialogPokemon(pokesheetstate, pokescaffoldState, pokescope, viewModel)
+                            Column(
+                                Modifier.fillMaxSize(),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                //verticalArrangement = Arrangement.Center
+                            ) {
+                                Title()
+                                Pickachu(viewModel)
+                                SetItemList(viewModel)
+
+
+                            }
+                            FloatBtn(this@MainActivity, viewModel)
+                            FloatingVoiceBtn(this@MainActivity, viewModel)
+                            if (viewModel.showDialog.value) {
+                                BottomDialog(sheetstate, scaffoldState, scope, viewModel)
+                            }
+                            if (viewModel.openAlertDialog.value) {
+                                DialogPokemon(
+                                    pokesheetstate,
+                                    pokescaffoldState,
+                                    pokescope,
+                                    viewModel
+                                )
+                            }
                         }
 
                     }
